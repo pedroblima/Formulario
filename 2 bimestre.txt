@@ -1,0 +1,8 @@
+projeto 2 bimestre 
+
+// criando o projeto 
+npx create-next-app@latest 
+
+
+// instalar as biblioteca
+npm i axios react-bootstrap bootstrap react-icons react-hook-form firebase uuid
