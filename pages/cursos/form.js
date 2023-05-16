@@ -1,7 +1,7 @@
 import Pagina from '@/components/Pagina'
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 
 const index = () => {
     
@@ -9,6 +9,7 @@ const index = () => {
 
     function salvar(dados){
         console.log(dados);
+        set(ref(db,'cursos/2'),dados)
     }
 
     return (
