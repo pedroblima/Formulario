@@ -1,15 +1,20 @@
 import Pagina from '@/components/Pagina'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import React  from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { set, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 const index = () => {
-    
+
+    const { push }  = useRouter()
+
     const { register, handleSubmit } = useForm()
 
-    function salvar(dados){
-        console.log(dados);
-        set(ref(db,'cursos/2'),dados)
+    function salvar(dados) { // salvar dados no localstorage 
+        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []// tirar de uma string 
+        cursos.push(dados)
+        window.localStorage.setItem('cursos', JSON.stringify(cursos))//transformar em uma string
+        push('/cursos')
     }
 
     return (
@@ -26,15 +31,17 @@ const index = () => {
                     <Form.Label>Duração:</Form.Label>
                     <Form.Control type="text" {...register('duracao')} />
                 </Form.Group>
-                
+
                 <Form.Group className="mb-3" controlId="modalidade">
                     <Form.Label>Modalidade:</Form.Label>
                     <Form.Control type="text" {...register('modalidade')} />
                 </Form.Group>
+        
 
-                <Button variant="success" onClick={handleSubmit(salvar)}>
-                    Salvar
-                </Button>
+                    <Button variant="success" onClick={handleSubmit(salvar)} >
+                        Salvar
+                    </Button>
+              
             </Form>
         </Pagina>
     )

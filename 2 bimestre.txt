@@ -6,3 +6,27 @@ npx create-next-app@latest
 
 // instalar as biblioteca
 npm i axios react-bootstrap bootstrap react-icons react-hook-form firebase uuid
+
+
+// useEffect 
+  useEffect(()=>{
+
+        apiDeputados.get('/deputados').then(resultado=>{
+           setDeputados(resultado.data.dados)
+        })
+    }, [])
+
+// map com uma key 
+ {cursos.map((curso, i) => (
+                        <tr key={i}>
+                            <td>
+                                <Button variant='danger'>
+                                    <BsFillTrash3Fill/>
+
+                                </Button>
+                            </td>
+                            <td>{curso.nome}</td>
+                            <td>{curso.modalidade}</td>
+                            <td>{curso.duracao}</td>
+                        </tr> 
+                    ))}
