@@ -50,11 +50,11 @@ const index = () => {
                         <tr key={i}>
                             <td>
                                 <Link href={'/cursos/' + i}>
-                                    <BsPencilSquare title='alterar' onClick={() => excluir(i)} />
+                                    <BsPencilSquare title='alterar'/>
                                 </Link>
                                 {''}
                                 <Button variant='secundary'>
-                                    <BsFillTrash3Fill title='alterar' className='text-primary' />
+                                    <BsFillTrash3Fill title='alterar' onClick={() => excluir(i)} />
                                 </Button>
                             </td>
                             <td>{curso.nome}</td>

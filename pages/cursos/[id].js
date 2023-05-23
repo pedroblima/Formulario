@@ -1,16 +1,30 @@
 import Pagina from '@/components/Pagina'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BiCheckSquare, BiCaretLeft } from 'react-icons/bi'
 
 const index = () => {
 
-    const { push } = useRouter()
+    const { push, query  } = useRouter()
+    const { register, handleSubmit, setValue  } = useForm()
 
-    const { register, handleSubmit } = useForm()
+
+    useEffect(() => {
+
+        if(query.id){
+
+            const cursos = JSON.parse(window.localStorage.getItem('cursos')) 
+            const curso = cursos[query.id] 
+            
+            setValue('nome', curso.nome)
+            setValue('duracao', curso.duracao)
+            setValue('modalidade', curso.modalidade)
+        }
+
+    }, [query.id])
 
     function salvar(dados) { // salvar dados no localstorage 
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []// tirar de uma string 

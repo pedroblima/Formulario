@@ -30,3 +30,11 @@ npm i axios react-bootstrap bootstrap react-icons react-hook-form firebase uuid
                             <td>{curso.duracao}</td>
                         </tr> 
                     ))}
+
+// useEffect com getAll
+const [cursos, setCursos] = useState([])
+
+    useEffect(() => {
+        setCursos(getAll())
+
+    }, [])
