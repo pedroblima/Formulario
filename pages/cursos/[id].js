@@ -18,10 +18,10 @@ const index = () => {
 
             const cursos = JSON.parse(window.localStorage.getItem('cursos')) 
             const curso = cursos[query.id] 
-            
-            setValue('nome', curso.nome)
-            setValue('duracao', curso.duracao)
-            setValue('modalidade', curso.modalidade)
+
+            for(let atributo in curso){
+                setValue(atributo, curso[atributo])
+            }
         }
 
     }, [query.id])
