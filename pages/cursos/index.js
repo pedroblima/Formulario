@@ -3,7 +3,9 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { AiFillPlusCircle } from 'react-icons/ai'
-import { BsFillTrash3Fill } from 'react-icons/bs'
+import { BsFillTrash3Fill, BsPencilSquare } from 'react-icons/bs'
+
+
 const index = () => {
 
     const [cursos, setCursos] = useState([])
@@ -18,10 +20,13 @@ const index = () => {
     }
 
     function excluir(id) {
-        const itens = getAll()
-        itens.splice(id, 1)
-        window.localStorage.setItem('cursos', JSON.stringify(itens))
-        setCursos(itens)
+        if (confirm('Deseja excluir o registro?')) {
+            const itens = getAll()
+            itens.splice(id, 1)
+            window.localStorage.setItem('cursos', JSON.stringify(itens))
+            setCursos(itens)
+
+        }
     }
 
     return (
@@ -44,9 +49,12 @@ const index = () => {
                     {cursos.map((curso, i) => (
                         <tr key={i}>
                             <td>
-                                <Button variant='danger'>
-                                    <BsFillTrash3Fill onClick={() => excluir(i)} />
-
+                                <Link href={'/cursos/' + i}>
+                                    <BsPencilSquare title='alterar' onClick={() => excluir(i)} />
+                                </Link>
+                                {''}
+                                <Button variant='secundary'>
+                                    <BsFillTrash3Fill title='alterar' className='text-primary' />
                                 </Button>
                             </td>
                             <td>{curso.nome}</td>
