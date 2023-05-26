@@ -28,7 +28,7 @@ const index = () => {
 
     function salvar(dados) { // salvar dados no localstorage 
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []// tirar de uma string 
-        cursos.push(dados)
+        cursos.splice(query.id, 1, dados)
         window.localStorage.setItem('cursos', JSON.stringify(cursos))//transformar em uma string
         push('/cursos')
     }
