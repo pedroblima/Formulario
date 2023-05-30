@@ -4,16 +4,29 @@ import React, { useEffect, useState } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { AiFillPlusCircle } from 'react-icons/ai'
 import { BsFillTrash3Fill, BsPencilSquare } from 'react-icons/bs'
-
+import axios from 'axios'
 
 const index = () => {
 
     const [disciplinas, setdisciplinas] = useState([])
 
     useEffect(() => {
-        
+      getAll()
 
-    }, [])  
+    }, [])
+    function getAll(){
+        axios.get('/api/disciplinas').then( resultado => {
+            setdisciplinas(resultado.data);
+        })
+    }
+
+    function excluir(id){
+        axios.delete('/api/disciplinas/' + id)
+        getAll()
+    }
+
+   
+
 
     return (
         <Pagina titulo='disciplinas'>
@@ -26,26 +39,24 @@ const index = () => {
                 <thead>
                     <tr>
                         <th>Apagar</th>
-                        <th>Nome</th>
-                        <th>Modalidade</th>
-                        <th>Duração</th>
+                        <th>materia</th>
+                        <th>cursos</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {disciplinas.map((disciplina, i) => (
-                        <tr key={i}>
+                    {disciplinas.map((item) => (
+                        <tr key={item.id}>
                             <td>
-                                <Link href={'/disciplinas/' + i}>
-                                    <BsPencilSquare title='alterar'/>
+                                <Link href={'/disciplinas/' + item.id}>
+                                    <BsPencilSquare title='alterar' />
                                 </Link>
                                 {''}
                                 <Button variant='secundary'>
-                                    <BsFillTrash3Fill title='alterar' onClick={() => excluir(i)} />
+                                    <BsFillTrash3Fill title='alterar' onClick={() => excluir(item.id)} />
                                 </Button>
                             </td>
-                            <td>{disciplina.nome}</td>
-                            <td>{disciplina.modalidade}</td>
-                            <td>{disciplina.duracao}</td>
+                            <td>{item.nome}</td>
+                            <td>{item.curso}</td>
                         </tr>
                     ))}
 
